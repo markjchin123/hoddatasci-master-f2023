@@ -11,13 +11,15 @@ Introduction to Data Science
 
 Mark J. Chin
 
-Office Hours: TBD
+Office Hours: On Zoom, Tuesdays 11-1 [Calendly Link](https://calendly.com/mark-chin/hod3200-office-hours) or by appointment
 
 Email: <mark.chin@vanderbilt.edu>
 
 Twitter: [@MemeMedianMode](https://twitter.com/MemeMedianMode)
 
 # Introduction
+
+*Note: The materials for this course have been heavily adapted from Will Doyle's HOD 3200 Course at Vanderbilt University* 
 
 We have entered a time in which vast amounts of data are more widely
 available than ever before. At the same time, a new set of tools has
@@ -90,7 +92,7 @@ encourage you to buy this book from [O’Reilly](http://amzn.to/2aHLAQ1).
 
 The other text is Nate Silver’s *Signal and the Noise*.
 
-Silver,N. (2012). *The signal and the noise: Why so many predictions
+Silver, N. (2012). *The signal and the noise: Why so many predictions
 fail-but some don’t*. New York: Penguin.
 
 [Amazon](https://www.amazon.com/Signal-Noise-Many-Predictions-Fail-but/dp/0143125087)
