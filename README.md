@@ -208,7 +208,7 @@ applied, ask me right away.
 
 # Schedule
 
-(Le) indicates lecture classes
+(Le) indicates lecture classes\\
 (La) indicates lab classes
 
 ## Thursday, August 24, Introduction
