@@ -70,7 +70,7 @@ the final project.
     will be accepted. Each assignment will be graded on a 100 point
     scale. Your lowest grade will be dropped.
 
--   Final Project 35%: During the course of the semester you will work
+-   Final Project 35%: During the course of the semester you will work **with a partner**
     on a final assignment utilizing your skills as a data analyst. We
     will discuss this assignment and my expectations in detail during
     the course of the semester. There will be four progress reports due
