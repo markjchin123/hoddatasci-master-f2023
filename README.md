@@ -7,16 +7,15 @@ Introduction to Data Science
 
 ## Course Number HOD 3200
 
-## Spring 2021
+## Spring 2023
 
-William R. Doyle
+Mark J. Chin
 
-Office Hours: Wednesdays and Thursdays, 2:30-5
-(<https://outlook.office365.com/owa/calendar/WillDoyle@Vanderbilt365.onmicrosoft.com/bookings/>) or by appointment
+Office Hours: TBD
 
-Email: <w.doyle@vanderbilt.edu>
+Email: <mark.chin@vanderbilt.edu>
 
-Twitter: [@wdoyle42](https://twitter.com/wdoyle42)
+Twitter: [@MemeMedianMode](https://twitter.com/MemeMedianMode)
 
 # Introduction
 
