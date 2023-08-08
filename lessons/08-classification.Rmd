@@ -1,0 +1,451 @@
+---
+title: "Classification"
+author: "Will Doyle"
+output: github_document
+---
+
+Classification is the process of predicting group membership. Understanding which individuals are likely to be members of which groups is a key task for data scientists. For instance, most recommendation engines that are at the hear of consumer web sites are based on classification algorithms, predicting which consumers are likely to purchase which products. 
+
+## Pizza
+
+Today we'll be working with the pizza dataset, which comes from the subreddit random acts of pizza. Each line represents a post to this subreddit. We have various characteristics of these posts, along with the request text from the post itself. We'll use these characteristics of the posts to predict whether or not the poster received pizza. This lesson is inspired by [this article](http://www.aaai.org/ocs/index.php/ICWSM/ICWSM14/paper/download/8106/8101)
+
+```{r libraries}
+library(knitr)
+library(tidyverse)
+library(tidytext)
+library(textdata)
+library(probably)
+library(modelr)
+library(yardstick)
+library(tidymodels)
+```
+
+```{r data}
+za<-read_csv("pizza.csv")
+```
+
+Below, I do some basic data wrangling, changing variable names and recoding a few variables to be in a more usable format. The outcome variable, whether the poster indicated they received a pizza, should be a binary variable: one if the person received a pizza, 0 otherwise. Our goal is to create a classifier that will accurately classify people in a testing dataset as to whether they will receive a pizza or not, based on the content of their post. This is a VERY common task in data science-- taking user supplied content and using it to accurately classify that user, typically as someone who will buy a product or service.   
+
+```{r wrangling}
+#Recoding
+za<-za%>%
+  mutate(got_pizza=ifelse(requester_received_pizza==TRUE,1,0))%>%
+  mutate(got_pizza_f=as_factor(ifelse(requester_received_pizza==TRUE,"Yes","No")))
+
+```
+
+Next, I shorten a bunch of variable names I plan to use. Long variable and data frame names should always be avoided. 
+
+```{r}
+## Renaming looooong variable names
+za$karma<-za$requester_upvotes_minus_downvotes_at_request
+
+za$age<-za$requester_account_age_in_days_at_request
+
+za$raop_age<-za$requester_days_since_first_post_on_raop_at_request
+
+za$pop_request<-za$number_of_upvotes_of_request_at_retrieval
+
+za$activity<-za$requester_number_of_subreddits_at_request
+
+za$total_posts<-za$requester_number_of_posts_at_request
+
+za$raop_posts<-za$requester_number_of_posts_on_raop_at_request
+```
+
+
+Then I have a series of variables that I want to to turn into binary variables, then into factors. The factor part will help me with labels and etc. 
+```{r}
+# Binary variable for any previous post on this subreddit
+za<-za%>%mutate(prev_raop_post=ifelse(raop_posts>0,1,0))%>%
+        mutate(
+           prev_raop_post=
+          fct_recode(as.factor(prev_raop_post),
+                                     "First Post"="0",
+                                     "Posted Before"="1"))
+
+# Binary variable: word "student" in text
+za<-za%>%mutate(student=ifelse(grepl(x=request_text,pattern="student",ignore.case=TRUE),1,0))%>%
+        mutate(student=fct_recode(as.factor(student),
+                            "Student"="1",
+                            "No student"="0"))
+
+
+## Raw count of words in post
+za$words<-str_count(za$request_text,"\\S+")
+
+# Binary variable: word "poor" in text
+
+za<-za%>%mutate(poor=ifelse(grepl(x=request_text,pattern="poor"),1,0))%>%
+  mutate(poor=fct_recode(as.factor(poor),
+                "Poor in post"="1",
+                "Poor not in post"="0"))
+
+# Binary variable: word "grateful"" in text
+
+za<-za%>%mutate(grateful=
+                  ifelse(grepl(x = request_text,pattern="grateful"),1,0))%>%
+                  mutate(grateful=fct_recode(as.factor(grateful),
+                  "Grateful in post"="1",
+                  "Grateful not in post"="0"))
+
+```
+
+
+## Sentiment Analysis
+
+Sentiment analysis involves coding the positive or negative sentiments provided in a given text. There are many ways to do this, but we're going to do a simple way. We will match the words in the post with a list of words known to contain positive or negative sentiments. We'll then sum up the total score of the post by the score of the sentiments expressed. 
+
+To get this done, we need to create a dataset that has one line per combination of post and word. 
+
+```{r}
+## Create a new dataset with one line per word per request: crazy, I know
+za_expand<-za%>%
+  dplyr::select(request_id,request_text)%>%
+  group_by(request_id)%>%
+  unnest_tokens(input=request_text,output=word,token="words")
+
+## What this looks like
+#za_expand%>%select(word)
+```
+
+Next, we drop what are called ["stop words"](https://en.wikipedia.org/wiki/Stop_words): words unlikely to have content that we are interested in. 
+
+```{r}
+## Drop known stop words
+za_expand<-za_expand%>%anti_join(stop_words,by="word")  
+
+## What this looks like
+#za_expand%>%select(word)
+```
+
+
+Notice how the content of the post has changed after dropping the stop words. 
+
+Now we'll combine this data frame with a dataframe of words with 
+[sentiment scores](https://en.wikipedia.org/wiki/Sentiment_analysis). 
+Each word gets its own score, if the word is associated with a positive or negative sentiment.In this analysis, non-sentiment words will be coded as 0. 
+
+```{r}
+sentiment<-get_sentiments("afinn")
+```
+
+
+```{r}
+## Merge with data frame of words and associated sentiment scores
+za_expand<-za_expand%>%left_join(sentiment,by="word")
+
+##Missing=0
+za_expand<-za_expand%>%
+  mutate(score=ifelse(is.na(value),0,value))
+
+```
+
+Now we're ready to bring this back in. We'll sum up the scores for each post to get how positive or negative it is. 
+
+```{r}
+## Sum score per post
+za_sum<-za_expand%>%group_by(request_id)%>%
+  summarize(score=sum(score))
+
+```
+
+Now we can add this back in. 
+```{r}
+za<-za%>%left_join(za_sum,by="request_id")
+
+head(za)
+
+za<-za%>%select(got_pizza,
+                got_pizza_f,
+                karma,
+                age,
+                raop_age,
+                pop_request,
+                activity,
+                total_posts,
+                raop_posts,
+                prev_raop_post,
+                words,
+                poor,
+                student,
+                grateful,
+                score
+                )
+
+save(za,file="za.RData")
+```
+
+
+## Conditional Means as a Classifier
+
+We'll start by generating some cross tabs and some quick plots, showing the probability of receiving pizza according to several characteristics of the post.  We start with a basic crosstab of the dependent variable. We use `prop.table` to change this from raw counts to proportions. I also provide a brief exampl of how to do a table using the `kable` function. 
+
+```{r descriptives}
+#Cross Tabs
+
+za%>%
+  count(got_pizza)%>% # Count numbers getting pizza
+  mutate(p=prop.table(n))%>% #mutate for proportions using prop.table
+  kable(format="markdown") # output to table
+
+```
+
+So, about 75% of the sample didn't get pizza, about 25% did. 
+
+Next, we cross-tabulate receiving pizza with certain terms. First, if the request mentioned the word "student."
+
+## A brief digression: crosstabs, percents, and percentage points
+https://www.cdc.gov/mmwr/volumes/70/wr/mm7013e3.htm
+
+|-----|-----|----|
+|                 |  Positive   |  Negative  |
+| Unvaccinated   |  161    | 828   |
+|Vaccinated    |   3   |  2476  |
+|-----|-----|
+
+
+|-----|-----|----|
+|                 |  Positive   |  Negative  |
+| Unvaccinated   |  .16    | .84   |
+|Vaccinated    |   .001   | .999   |
+|-----|-----|
+
+```{r}
+za%>%
+  group_by(student,got_pizza)%>%
+  summarize(n=n())%>%
+  mutate(prop=n/sum(n))%>%
+  subset(select=c("student","got_pizza","prop"))%>%
+  spread(got_pizza,prop)%>%
+  kable()
+```
+
+Next, if the request mentioned the word "grateful."
+
+```{r}
+
+za%>%
+  group_by(grateful,got_pizza)%>%
+  summarize(n=n())%>%
+  mutate(prop=n/sum(n))%>%
+  subset(select=c("grateful","got_pizza","prop"))%>%
+  spread(got_pizza,prop)%>%
+  kable()
+
+```
+
+Crosstabs using binary data are equivalent to generating conditional means, as shown below. 
+
+```{r condtional_means}
+#Predictions using conditional means
+
+za%>%group_by(grateful)%>%summarize(mean(got_pizza,na.rm=-TRUE))
+
+```
+
+But, we can also use conditional means to get proportions for very particular sets of characteristics. In this case, what about individuals who included some combination of the terms "grateful","student" and "poor" in their posts? 
+
+```{r}
+za%>%group_by(grateful,student)%>%summarize(mean(got_pizza))
+
+za_sum<-za%>%group_by(grateful,student,poor)%>%summarize(mean_pizza=mean(got_pizza))
+
+za_sum
+
+```
+
+## Probability of Receiving Pizza, Using Various Terms in Post
+```{r}
+gg<-ggplot(za_sum,aes(x=grateful,y=mean_pizza,fill=grateful))
+gg<-gg+geom_bar(stat="identity")
+gg<-gg+facet_wrap(~student+poor)
+gg
+```
+
+
+## Logistic regression as a classifier
+
+Logistic regression is set up to handle binary outcomes as the dependent variable. The downside to logistic regression is that it is modeling the log odds of the outcome, which means all of the coefficients are expressed as log odds, which no one understands intuitively. 
+
+We're going to use the "tidymodels" approach to running this model, which works much better for a standard data science workflow. It begins with splitting the data into testing and training datasets using the `initial_split` function.  
+
+
+```{r}
+# Training and testing datasets
+
+za_split<-initial_split(za,prop=.5)
+
+za_train<-training(za_split)
+
+za_test<-testing(za_split)
+
+```
+
+
+Next we set up the terms of the model. Notice the use of a log function for total posts, which follow a classic exponential distribution. 
+
+```{r linear_model}
+#  Model terms
+
+za_formula<-as.formula("got_pizza_f~
+             age+
+             karma+
+             log(total_posts+1)+
+             raop_posts+
+             student+
+             grateful+
+             pop_request+
+             score")
+
+
+```
+
+
+Now we're going to run the model. This approach is a little different than what we've been using up until now. We're going to create a `logit_class` object by fitting a logistic regression to our outcome. The `set_engine` function says what particular kind of logistic regression we want to fit, and the fit argument sets out the formula and the data. 
+
+```{r}
+#Logistic model
+
+logit_class<-logistic_reg(mode="classification")%>%
+  set_engine("glm")%>%
+  fit(za_formula,data=za_train)
+
+## Show coefficients
+logit_class$fit%>%summary()
+
+```
+
+With these results in hand we can generate predicted classifications. 
+
+We can convert the predictions to a binary variable by setting a "threshold" of .5. Any prediction above .5 is considered to be a 1, anything below, a 0. We'll compare the actual "truth" of whether or not someone got a pizza with our prediction from the model using what's called a "confusion matrix" (really). 
+
+
+```{r}
+logit_class%>%
+  predict(za_test)%>%
+  bind_cols(za_test)%>%
+  conf_mat(truth=got_pizza_f,estimate=.pred_class)
+
+```
+
+
+The confusion matrix generated here is explained [here](https://topepo.github.io/caret/measuring-performance.html#class). 
+
+
+We're usually interested in three things: the overall accuracy of a classification is the proportion of cases accurately classified. The sensitivity is the proportion of "ones" that are accurately classified as ones-- it's the probability that a case classified as positive will indeed be positive. Specificity is the probability that a case classified as 0 will indeed be 0. 
+
+
+## Accuracy: proportion correctly identifed
+```{r}
+logit_class%>%
+  predict(za_test)%>%
+  bind_cols(za_test)%>%
+  metrics(truth=got_pizza_f,estimate=.pred_class)
+```
+
+## Sensitivity, probability of saying it's a Yes when it's really a yes
+```{r}
+
+logit_class%>%
+  predict(za_test)%>%
+  bind_cols(za_test)%>%
+  sens(truth=got_pizza_f,estimate=.pred_class)
+
+```
+
+
+## Specificity, probability of saying it's a No when it's really a No
+```{r}
+
+logit_class%>%
+  predict(za_test)%>%
+  bind_cols(za_test)%>%
+  yardstick::spec(truth=got_pizza_f,estimate=.pred_class)
+
+```
+
+
+
+*Question: how do you get perfect specificity? How do you get 
+perfect sensitivity?*
+
+
+#Thresholds
+
+As we vary the threshold from 0 to 1, the sensitivity will decrease, while the specificity will increase. The best models will be able to have both high sensitivity and specificty at an threshold. The code below shows what happens to sensitivity and specificity as thresholds go from 0 to 1. 
+
+```{r}
+
+th<-logit_class%>%
+  predict(za_test,type="prob")%>%
+  bind_cols(za_test)%>%
+ threshold_perf(truth=got_pizza_f,
+                 estimate=.pred_Yes,
+                 thresholds=seq(0,1,by=.1),metrics=c("sens","spec"))
+
+ggplot(filter(th,.metric%in%c("sens","spec")),
+       aes(x=.threshold,y=.estimate,color=.metric))+
+  geom_line()
+  
+
+```
+
+
+
+## Area Under the Curve (AUC)
+
+The area under the curve considers both the sensitivity (does the model accurately predict every positive outcome) with the specificity (does the model accurately predict every negative outcome) for a given model, and does so across every possible threshold value. 
+
+```{r}
+
+logit_class%>%
+  predict(za_test,type="prob")%>%
+  bind_cols(za_test)%>%
+  roc_auc(truth=got_pizza_f,.estimate=.pred_Yes)
+```
+
+
+
+```{r}
+logit_class%>%
+  predict(za_test,type="prob")%>%
+  bind_cols(za_test)%>%
+  roc_curve(truth=got_pizza_f,.estimate=.pred_Yes)%>%
+  autoplot()
+
+```
+
+
+# Plotting results from logisitc regression
+
+Because individual coefficients are so hard to understand, most of the time we convert the results to predicited probabilities, using a range of hypothetical values, as in the code below. 
+```{r}
+hypo_data<-za_train%>%data_grid(
+  age=mean(age,na.rm=TRUE),
+  karma=mean(karma,na.rm=TRUE),
+  total_posts=mean(total_posts,na.rm=TRUE),
+  raop_posts=seq_range(raop_posts,n=100),
+  student=as_factor(levels(student)),
+  grateful=as_factor(levels(grateful)[1]),
+  pop_request=mean(pop_request,na.rm=TRUE),
+  score=mean(score,na.rm=TRUE)
+)
+
+logit_class%>%
+  predict(hypo_data,type="prob")%>%
+  bind_cols(hypo_data)%>%
+  rename(`Post Includes "Student"`=student)->plot_data
+
+gg<-ggplot(plot_data,aes(x=raop_posts,y=.pred_Yes,color=`Post Includes "Student"`))
+gg<-gg+geom_line()
+gg<-gg+xlab("Number of Posts on RAOP")+ylab("Prob(Pizza)")
+
+gg
+
+```
+
+
+
+

@@ -1,0 +1,7 @@
+## Plotting Means: In Class Work
+
+1. Using the student debt dataset, calculate and plot average SAT by region. Plot the result using a bar plot. Make it nicely labeled and beautiful in every way.
+2. Repeat the above plot, but use a dot plot and reverse the axes. 
+3. Calculate and plot average SAT scores  by region  AND predominant degree type. Use a bar plot. 
+4. Change the color scheme of the above plot. 
+5. Calculate and plot SAT scores by region and predominant degree  with a separate plot (hint:facet_wrap) for 2 and 4 year institutions.  

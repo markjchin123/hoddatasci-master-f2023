@@ -1,0 +1,203 @@
+---
+title: "Unsupervised Learning"
+author: "Doyle"
+date: "11/13/2019"
+output: github_document
+---
+
+# Introduction
+
+K means clustering is an example of *unsupervised learning*, a set of techniques used to identify patterns of association within a dataset that are not driven by the analyst. This technique is employed when it is strongly suspected that there are latent classifications of individuals in a dataset, but those classifications are unknown. 
+
+There are many types of unsupervised learning---this is a very active area of development in data science. K-means is among the simplest, and is relatively easy to explain. It's also pretty good--- it tends to get decent answers. K-means proceeds by finding some number (K) groups of observations that are quite similar to one another, but quite different from other groups of observations. Similarity in this case is defined as having minimum variation within the group. The way this is done in practice is to start by randomly assigning each observation to a cluster, then to calculate the cluster centroid, which is the means of the variables used for the algorithm. Next, assign each observation to the cluster centroid which is closest to its means. This continues until no more changes are possible. 
+
+If the data have clear underlying partitions, then the cluster assignment will be pretty stable. If not, then each time you run this algorithm, you could get different answers. There are solutions to this problem we'll go over, but please remember this basic fact about K-means clustering, which is different than any of the algorithms we cover in this class:
+
+*K MEANS CLUSTERING IN ITS BASIC FORM CAN GIVE YOU DIFFERENT ANSWERS EACH TIME YOUR RUN IT*.
+
+We'll be working with the NBA data that we scraped earlier this semester to define different classes of players based on their characteristics across the season. Based on these results, we'll see what we can figure out about the likely points contribution of players from different groups. 
+
+There are two new libraries today: LICORS and factoextra. 
+
+```{r,include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, warning=FALSE, results ='hide',include=TRUE, message = FALSE)
+library(knitr)
+library(tidyverse)
+library(LICORS)
+library(factoextra)
+library(cluster)
+library(stargazer)
+```
+
+```{r}
+knitr::opts_chunk$set(echo = FALSE, warning=FALSE, results ='hide',include=TRUE, message = FALSE)
+```
+
+
+We'll pull in the NBA dataset, which has data on all players from all teams from 1993 to 2018
+```{r}
+load("nba.Rdata")
+```
+
+
+We're going to subset the data to players who put in at least 500 minutes, which is roughly averaging half a quarter per game (6*82=492). 
+```{r}
+nba_df_all%>%
+  filter(minutes_played>500)%>%
+  group_by(player,year)%>%
+  top_n(1,minutes_played)%>%
+  ungroup()%>%
+   select(player,
+         pts,
+         minutes_played,
+         fg,
+         fg_attempts,
+         fg_percent,
+         three_pointers,
+         three_point_attempts,
+         three_point_percent,
+         two_pointers,
+         two_point_attempts,
+         two_point_percent,
+         effective_fg_percent,
+         free_throws,
+         free_throw_attempts,
+         free_throw_percent,
+         off_rebound,
+         def_rebound,
+         total_rebound,
+         assists,
+         steals,
+         blocks,
+         turnovers,
+         fouls,
+         year)%>%
+               drop_na()->nba_df_sub
+
+
+## Remove points scored and player name
+player_id<-nba_df_sub$player
+points<-nba_df_sub$pts
+
+# Scale the dataset
+nba_df_sub%>%
+  select(-player,-pts)%>%
+  mutate_all(scale)->nba_df_cluster_all
+
+# Set player name as row id
+rownames(nba_df_cluster_all)<-player_id
+
+```
+
+
+The first step in running cluster analysis is to figure out how many clusters are needed. It's generally assumed that there are at least 3 clusters, but it's not easy to think about how many more might be needed.
+
+The `stepFlexClust` command can be helpful here. What it will do is to run a cluster analysis a certain number of times for a certain number of clusters, choosing the best fit (minimum distance) from each set of runs for each number of clusters. We can then take a look at the distances generated and plot them. 
+
+
+```{r}
+  
+fviz_nbclust(nba_df_cluster,
+             FUNcluster=kmeanspp,
+             method="wss")
+
+ggsave(paste0("elbow_",year,".png"))
+
+```
+
+The silhouette method measures the fit of each observation within each cluster. The resulting plot generally provides a pretty clear indication of the appropriate number of clusters. 
+
+```{r}
+fviz_nbclust(nba_df_cluster,
+             FUNcluster=kmeanspp,
+             method="silhouette")
+```
+
+
+The `kmeanspp` (stands for k-means ++) command will repeat the kmeans clustering algorithm with different starting points until it converges on a stable solution. It basically repeats the process we saw above, but with the intention of getting to a stable solution. This is generally a preferred way of generating cluster assignments. 
+
+```{r}
+c1<-kmeanspp(nba_df_cluster,
+             k=5,
+             iter.max=1000,
+             nstart=50)
+```
+
+Notice how the sample sizes in each group are identical, although the group numbers (which are arbitrary) are different after each run. 
+
+We can visualize the groups by taking a look at a plot of the various groupings, labeled by player name. 
+```{r}
+fviz_cluster(c1,
+             data=nba_df_cluster,
+             labelsize = 6)
+```
+
+
+# Understanding cluster assignments
+
+So now what? We need to figure out what these clusters mean by inspecting them as a function of the constituent variables. 
+
+The code below summarizes the average of each variable in the analysis within each cluster. We need to take a look at these and figure out what they mean. 
+
+```{r}
+nba_df_cluster$cluster<-c1$cluster
+
+nba_df_cluster%>%
+  group_by(cluster)%>%
+  summarize_all(.funs=mean)%>%
+  pivot_longer(cols=(-cluster),
+               names_to="stat",
+               values_to = "mean_results")->clus_results
+```
+
+
+We can then plot the averages for each cluster. Remember that these are standardized variables, so they will generally range from -3 to 3, with 0 being the average. 
+
+```{r}
+gg<-ggplot(clus_results,aes(x=as_factor(stat),
+                            y=mean_results,
+                            color=stat))
+gg<-gg+geom_point()
+gg<-gg+facet_wrap(~cluster,ncol=1)
+gg<-gg+geom_hline(yintercept=0)
+gg<-gg+coord_flip()
+gg<-gg+theme(legend.position = "none")
+gg<-gg+theme(axis.text.x=element_text(size=.75))
+gg
+```
+
+We can also go back to the original dataset and see if we can make sense of individaul assignments. The code below shows how each player has been assigned, selecting the top ten field goal scorers from each cluster. 
+
+```{r,results='asis'}
+nba_df_sub$cluster<-c1$cluster
+nba_df_sub$player<-player_id
+
+nba_df_sub%>%
+  group_by(cluster)%>%
+  mutate(rank=rank(-fg,ties.method = "first"))%>%
+  filter(rank<=10)%>%
+  select(player,fg,total_rebound,rank)%>%
+  arrange(cluster,-fg)%>%kable()
+```
+
+# Modeling Using Clusters
+
+Once you have clusters, then you can use these as independent variables to predict various outcomes.
+
+```{r,results='asis'}
+nba_df_sub$pts<-points
+
+mod1<-lm(pts~as_factor(cluster),data=nba_df_sub)
+
+stargazer(mod1,type="html")
+
+```
+
+```{r}
+for (year in seq(1995,2015,by=5)){
+  load("nba.Rdata")
+  nba<-filter(nba_df_all,year==year)
+  save(nba,file=paste0("nba_",year,".Rdata"))
+}
+```
+
