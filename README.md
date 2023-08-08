@@ -11,7 +11,7 @@ Introduction to Data Science
 
 Mark J. Chin
 
-Office Hours: On Zoom, Tuesdays 11-1 [Calendly Link](https://calendly.com/mark-chin/hod3200-office-hours) or by appointment
+Office Hours: On Zoom, Tuesdays 11-1 [(Calendly Link)](https://calendly.com/mark-chin/hod3200-office-hours) or by appointment
 
 Email: <mark.chin@vanderbilt.edu>
 
