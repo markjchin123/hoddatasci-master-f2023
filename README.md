@@ -201,17 +201,19 @@ assignments and the final project.
 *Assignments* You may collaborate with anyone and you may utilize any
 resource you wish to complete these assignments.
 
-*Final Project* All of the work on the final assignment must be your
-own. Anyone’s work that you reference should be cited, as usual. All
-data that you do not personally collect must be cited, as with any other
-resource.
+*Final Project* All of the work on the final assignment must be the work of you and your partner alone. Anyone’s work that you reference should be cited, as usual. All data that you do not personally collect must be cited, as with any other resource.
 
 If you have any questions at all about the honor code or how it will be
 applied, ask me right away.
 
 # Schedule
 
-## Tuesday, January 26 Topic for the Week: Getting Data– Tools of the Trade
+(Le) indicates lecture classes
+(La) indicates lab classes
+
+## Thursday, August 24, Introduction
+
+## Tuesday, August 29, (Le) Getting Data: Tools of the Trade
 
 *Resources*
 
@@ -242,14 +244,14 @@ Resources](https://guides.github.com/activities/hello-world/)
 
 `01-intro.Rmd`.
 
-## Thursday, January 28 Getting Data: Tools of the Trade
+## Thursday, August 31, (La) Getting Data: Tools of the Trade
 
 Subtopics: “verbs” of data wrangling, file types, working with git and
 GitHub.
 
 *Lab Practical* R Basics, “verbs” of data wrangling
 
-## Tuesday, February 2 Analyzing Data: Conditional Means
+## Tuesday, September 5, (Le) Analyzing Data: Conditional Means
 
 *Resources*
 
@@ -264,13 +266,13 @@ Condtional Means: `02-conditional_means.Rmd`.
 
 Assignment 1 Due Midnight, Sunday, January 31
 
-## Thursday, February 4 Conditional Means, continued
+## Thursday, September 7, (La) Analyzing Data: Conditional Means
 
 *Standing Meetings*
 
 *Lab Practical: Conditional Means*
 
-## Tuesday, February 9 Presenting Data: Descriptives
+## Tuesday, September 12, (Le) Presenting Data: Descriptives
 
 Subtopics: bar plot, density plot, dot plots, histograms
 
@@ -296,14 +298,13 @@ Plotting Distributions and Condtional Means: `03-plot_means.Rmd`.
 
 Assignment 2 Due Midnight Sunday, February 7
 
-## Thursday, February 11 Descriptive Graphics, continued
+## Thursday, September 14, (Le) Presenting Data: Descriptives
 
 *Standing Meeting* Progress Report 1 Due
 
-*Lab Practical: Presenting results in graphical format: barplots,
-density plots, dot plots, histograms*
+*Lab Practical: Presenting results in graphical format: barplots, density plots, dot plots, histograms*
 
-## Tuesday, February 16 Getting Data: Flat Files, Basic Concepts of “Tidy Data”
+## Tuesday, September 19, (Le) Getting Data: Flat Files, Basic Concepts of “Tidy Data”
 
 *Resources*
 
@@ -318,22 +319,13 @@ Flat Data `04-flat_data.Rmd`
 
 Assignment 3 Due Midnight Sunday, February 14
 
-## Thursday, February 18 Flat Files and Tidy Data, continued
+## Thursday, September 21, (La) Getting Data: Flat Files, Basic Concepts of “Tidy Data”
 
 *Standing Meeting*
 
 *Lab Practical: working with various data formats*
 
-## Tuesday, February 23 Reading Day
-
-Assignment: watch one of the following movies
-
--   Moneyball
--   Minority Report
--   Her
--   Margin Call
-
-## Thursday, February 25 Analyzing Data: Linear Regression
+## Tuesday, September 26, (Le) Analyzing Data: Linear Regression
 
 *Resources*
 
@@ -345,7 +337,7 @@ Building](http://r4ds.had.co.nz/model-building.html)
 
 Linear Regression `05-regression.Rmd`
 
-## Tuesday, March 2 Analyzing Data: Linear Regression, continued
+## Thursday, September 28, (Le) Analyzing Data: Linear Regression, continued
 
 *Training and Testing Models*
 
@@ -353,11 +345,11 @@ Linear Regression `05-regression.Rmd`
 
 Assignment 4 Due Midnight Sunday, February 28
 
-## Thursday, March 4 Linear Regression, continued
+## Tuesday, October 3, (La) Analyzing Data: Linear Regression
 
 *Second Progress Report for Final Project Due*
 
-## Tuesday, March 9 Presenting Data: Scatterplots
+## Thursday, October 5, (Le) Presenting Data: Scatterplots
 
 *Resources*
 
@@ -378,13 +370,13 @@ Scatterplots `06-scatterplots.Rmd`
 
 Assignment 5 Due Midnight Sunday, March 7
 
-## Thursday, March 11 Scatterplots, continued
+## Tuesday, October 10, (La) Scatterplots, continued
 
 *Standing Meetings*
 
 *Lab Practical: Presenting Data via Scatterplots*
 
-## Tuesday, March 16 Getting Data: Scraping Data from the Web, APIs
+## Thursday, October 12, (Le) Getting Data: Scraping Data from the Web, APIs
 
 *Resources*
 
@@ -405,13 +397,15 @@ Web Scraping and APIs, `07-webscraping.Rmd`
 
 Assignment 6 Due Midnight Sunday, March 14
 
-## Thursday, March 18 Web Data, continued
+## Tuesday, October 17, Web Data, continued
 
 *Standing Meetings*
 
 *Lab Practical*
 
-## Tuesday, March 23 Analyzing Data: Classification
+## Thursday, October 19, No Class (Fall Break)
+
+## Tuesday, October 24, Analyzing Data: Classification
 
 *Resources*
 
@@ -439,9 +433,9 @@ Assignment 7 Due Midnight Sunday, March 21
 
 Classifying behavior via text analysis: random acts of pizza.
 
-## Thursday, March 25 Classification, continued
+## Thursday, October 26, Classification, continued
 
-## Tuesday, March 30 Presenting Data: Plots for Classification
+## Tuesday, October 31, Presenting Data: Plots for Classification
 
 *Resources*
 
@@ -453,7 +447,7 @@ Plots for Classification `09-plots_classification.Rmd`
 
 Assignment 8 Due Midnight Sunday, March 28
 
-## Thursday, April 1 Plots for Classification, continued
+## Thursday, November 2, Plots for Classification, continued
 
 *Standing Meetings*
 
@@ -463,7 +457,7 @@ Assignment 8 Due Midnight Sunday, March 28
 
 Plots for understanding classification
 
-## Tuesday, April 6 Analyzing Data: Cross Validation
+## Tuesday, November 7, Analyzing Data: Cross Validation
 
 *Resources*
 
@@ -482,12 +476,12 @@ introduction to statistical learning (Vol. 6). New York: Springer.
 
 Assignment 9 Due Midnight Sunday, April 4
 
-## Thursday, April 8 Reading Day
+## Thursday, November 9, Reading Day
 
 Read Jill Lepore [“How the Simulmatics Corporation Invented the
 Future”](https://www.newyorker.com/magazine/2020/08/03/how-the-simulmatics-corporation-invented-the-future)
 
-## Tuesday, April 13 Cross Validation, continued
+## Tuesday, November 14, Cross Validation, continued
 
 *Standing Meeting*
 
@@ -495,13 +489,17 @@ Future”](https://www.newyorker.com/magazine/2020/08/03/how-the-simulmatics-cor
 
 Lab Practical: Cross Validation
 
-## Thursday, April 15 Cross Validation, continued
+## Thursday, November 16, Cross Validation, continued
 
 *Lab Practical*
 
 Lab Practical: Cross Validation for Classification
 
-## Tuesday, April 20 Reporting Results: Using Knitr
+## Tuesday, November 21, No Class (Thanksgiving)
+
+## Tuesday, November 23, No Class (Thanksgiving)
+
+## Tuesday, November 28, Reporting Results: Using Knitr
 
 *Resources*
 
@@ -518,18 +516,18 @@ Code](http://www-bcf.usc.edu/~gareth/ISL/Chapter%2010%20Labs.txt)
 
 Assignment 10 Due Midnight Sunday, April 18
 
-## Thursday, April 22 Reporting Results, Continued
+## Thursday, November 30, Reporting Results, Continued
 
 *Standing Meetings*
 
 *Fourth Progress Reports Due*
 
-## Tuesday, April 27 Class Presentations
+## Tuesday, December 5, Class Presentations
 
 Group 1
 
-## Thursday, April 29 Class Presentations
+## Thursday, December 7, Class Presentations
 
 Group 2
 
-## Final Projects Due Tuesday, May 4, midnight
+## Final Projects Due Thursday, December 14, 11:59 PM CT
