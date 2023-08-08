@@ -7,7 +7,7 @@ Introduction to Data Science
 
 ## Course Number HOD 3200
 
-## Spring 2023
+## Fall 2023
 
 Mark J. Chin
 
