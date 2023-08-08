@@ -154,8 +154,8 @@ be collected and graded through GitHub as well.
 
 # Communication
 
-You can book my office hours at: <https://calendly.com/mark-chin/hod3200-office-hours> If my
-office hours don’t work for you, please make an appointment over email.
+You can book my office hours at: <https://calendly.com/mark-chin/hod3200-office-hours> 
+If my office hours don’t work for you, please make an appointment over email.
 Student communications, including emails are my priority. However, due
 to the volume of email I receive, I may miss your message. To help with
 this problem, please place the phrase \`\`HOD 3200’’ in your subject
