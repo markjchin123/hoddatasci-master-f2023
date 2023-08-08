@@ -50,7 +50,7 @@ the results of analysis. For each area, the subtopics are as follows:
 -   Regression
 -   Supervised learning: classification
 -   Unsupervised learning: K-means and nearest neighbors clustering
--   Evaluating multiple models/ Cross Validation
+-   Evaluating multiple models/Cross Validation
 
 ## Presenting Data Analysis Topics
 
@@ -114,7 +114,7 @@ Press.
 
 Tufte, E. R. (1997) Visual explanations. Cheshire, CT: Graphics press.
 
-Tufte, E. R.(2001). The visual display of quantitative information (2nd
+Tufte, E. R. (2001). The visual display of quantitative information (2nd
 Edition). Cheshire, CT: Graphics press.
 
 # Lecture Notes
@@ -154,17 +154,14 @@ be collected and graded through GitHub as well.
 
 # Communication
 
-You can book my office hours at: <https://outlook.office365.com/owa/calendar/WillDoyle@Vanderbilt365.onmicrosoft.com/bookings/> If my
+You can book my office hours at: <https://calendly.com/mark-chin/hod3200-office-hours> If my
 office hours don’t work for you, please make an appointment over email.
 Student communications, including emails are my priority. However, due
 to the volume of email I receive, I may miss your message. To help with
 this problem, please place the phrase \`\`HOD 3200’’ in your subject
 line. I will search for these messages every time I access my email. You
 can also use Brightspace’s email function, which will automatically do
-this for you. If you have a general question that I can answer for the
-whole class, send me a message on twitter at
-[@wdoyle42](https://twitter.com/wdoyle42), tagged \#hoddatasci, or you
-can send a direct message.
+this for you.
 
 # The Tedious Stuff
 
