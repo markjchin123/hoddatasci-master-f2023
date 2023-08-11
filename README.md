@@ -52,7 +52,7 @@ Students will be evaluated based in two areas: weekly assignments and the final 
 
 -   Problem sets 65%: Almost every week I will assign a problem set for students to complete focused on practicing the topic of the week. These problem sets will generally be due one week after introduction of the topic, at 11:59:59 pm. So if we introduce a new topic on Tuesday, the assignment will be due Monday 11:59:59 pm the following week. Thursday introductions mean Wednesday deadlines. No late assignments will be accepted. Each assignment will be graded on a 100 point scale. Your lowest grade will be dropped.
 
--   Final Project 35%: During the course of the semester you will work [**with a partner**]{.underline} on a final assignment utilizing your skills as a data analyst. We will discuss this assignment and my expectations in detail during the course of the semester. There will be four progress reports due for the final project, each of which will be worth 12.5% of the final grade for the project. No late progress reports will be accepted. The final product will account for the remaining 50%. No late final products will be accepted.
+-   Final Project 35%: During the course of the semester you will work **with a partner** on a final assignment utilizing your skills as a data analyst. We will discuss this assignment and my expectations in detail during the course of the semester. There will be four progress reports due for the final project, each of which will be worth 12.5% of the final grade for the project. No late progress reports will be accepted. The final product will account for the remaining 50%. No late final products will be accepted.
 
 # Texts
 
