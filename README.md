@@ -15,7 +15,7 @@ Link)](https://calendly.com/mark-chin/hod3200-office-hours) or by
 appointment
 
 Email:
-[mark.chin\@vanderbilt.edu](mailto:mark.chin@vanderbilt.edu){.email}
+[mark.chin\@vanderbilt.edu](mailto:mark.chin@vanderbilt.edu)
 
 Twitter: [\@MemeMedianMode](https://twitter.com/MemeMedianMode)
 
