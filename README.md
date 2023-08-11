@@ -1,9 +1,3 @@
----
-editor_options: 
-  markdown: 
-    wrap: 72
----
-
 # Introduction to Data Science
 
 ## Vanderbilt University
