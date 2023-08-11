@@ -16,6 +16,8 @@ Email: [mark.chin\@vanderbilt.edu](mailto:mark.chin@vanderbilt.edu)
 
 Twitter: [\@MemeMedianMode](https://twitter.com/MemeMedianMode)
 
+Course github: [Link](https://github.com/MemeMedianMode/hoddatasci-master-f2023)
+
 # Introduction
 
 *Note: The materials for this course have been heavily adapted from Will Doyle's HOD 3200 Course at Vanderbilt University*
@@ -82,7 +84,7 @@ Tufte, E. R. (2001). The visual display of quantitative information (2nd Edition
 
 # Lecture Notes
 
-My lecture notes include both code and notes for the week. They will be available in your private github repository.
+My lecture notes include both code and notes for the week. They will be available in github.
 
 # Web Resources
 
@@ -94,7 +96,7 @@ We will use only free, [open source](https://opensource.org/osd-annotated) softw
 
 We will use [R](https://cran.r-project.org/), an open-source data analytic platform for all analysis. R appears to be the most widely used data analysis software in data science. We will utilize [Rstudio](https://posit.co/products/open-source/rstudio/) as our integrated development environment (IDE) for R.
 
-We will also use [git](https://git-scm.com/), a distributed version control program, and [Github](https://github.com/), an online hosting platform. [Github Desktop](https://desktop.github.com/) will serve as our Graphical User Interface to git and GitHub. RStudio is fully integrated with git and Github, making it an ideal IDE for these purposes. Class assignments will be distributed through GitHub and will be collected and graded through GitHub as well.
+We will also use [git](https://git-scm.com/), a distributed version control program, and [Github](https://github.com/), an online hosting platform. [Github Desktop](https://desktop.github.com/) will serve as our Graphical User Interface to git and GitHub. RStudio is fully integrated with git and Github, making it an ideal IDE for these purposes. Up to date class assignments will be distributed through GitHub and will be collected and graded through Brightspace.
 
 # Communication
 
@@ -122,11 +124,9 @@ If you have any questions at all about the honor code or how it will be applied,
 
 # Schedule
 
-(Le) indicates lecture classes\\ (La) indicates lab classes
-
 ## Thursday, August 24, Introduction
 
-## Tuesday, August 29, (Le) Getting Data: Tools of the Trade
+## Tuesday, August 29, Getting Data: Tools of the Trade
 
 *Resources*
 
@@ -150,7 +150,7 @@ R Intro and Resources
 
 Introduction: `01-intro.Rmd`.
 
-## Thursday, August 31, (La) Getting Data: Tools of the Trade
+## Thursday, August 31, Tools of the Trade, continued
 
 Subtopics: "verbs" of data wrangling, file types, working with git and GitHub.
 
@@ -158,7 +158,7 @@ Subtopics: "verbs" of data wrangling, file types, working with git and GitHub.
 
 R Basics, "verbs" of data wrangling
 
-## Tuesday, September 5, (Le) Analyzing Data: Conditional Means
+## Tuesday, September 5, Analyzing Data: Conditional Means
 
 *Resources*
 
@@ -174,7 +174,7 @@ Conditional Means: `02-conditional_means.Rmd`.
 
 Assignment 1 Due 11:59 PM, Monday, September 4
 
-## Thursday, September 7, (La) Analyzing Data: Conditional Means
+## Thursday, September 7, Conditional Means, continued
 
 *Standing Meetings*
 
@@ -182,7 +182,7 @@ Assignment 1 Due 11:59 PM, Monday, September 4
 
 Conditional Means
 
-## Tuesday, September 12, (Le) Presenting Data: Descriptives
+## Tuesday, September 12, Presenting Data: Descriptives
 
 Subtopics: bar plot, density plot, dot plots, histograms
 
@@ -202,7 +202,7 @@ Plotting Distributions and Conditional Means: `03-plot_means.Rmd`.
 
 Assignment 2 Due 11:59 PM, Monday, September 11
 
-## Thursday, September 14, (Le) Presenting Data: Descriptives
+## Thursday, September 14, Descriptives, continued
 
 *Standing Meeting*
 
@@ -214,7 +214,7 @@ Presenting results in graphical format: barplots, density plots, dot plots, hist
 
 Progress Report 1 Due before class
 
-## Tuesday, September 19, (Le) Getting Data: Flat Files, Basic Concepts of "Tidy Data"
+## Tuesday, September 19,Getting Data: Flat Files, Basic Concepts of "Tidy Data"
 
 *Resources*
 
@@ -228,7 +228,7 @@ Flat Data: `04-flat_data.Rmd`
 
 Assignment 3 Due 11:59 PM, Monday, September 18
 
-## Thursday, September 21, (La) Getting Data: Flat Files, Basic Concepts of "Tidy Data"
+## Thursday, September 21, Flat Files, Basic Concepts of "Tidy Data", continued
 
 *Standing Meeting*
 
@@ -236,7 +236,7 @@ Assignment 3 Due 11:59 PM, Monday, September 18
 
 Working with various data formats
 
-## Tuesday, September 26, (Le) Analyzing Data: Linear Regression
+## Tuesday, September 26, Analyzing Data: Linear Regression
 
 *Resources*
 
@@ -246,7 +246,7 @@ Wickham: [Model: Introduction](http://r4ds.had.co.nz/model-intro.html), [Model B
 
 Linear Regression: `05-regression.Rmd`.
 
-## Thursday, September 28, (Le) Analyzing Data: Linear Regression, continued
+## Thursday, September 28, Linear Regression, continued
 
 Subtopics: training and testing models
 
@@ -254,7 +254,7 @@ Subtopics: training and testing models
 
 Assignment 4 Due 11:59 PM, Wednesday, September 27
 
-## Tuesday, October 3, (La) Analyzing Data: Linear Regression
+## Tuesday, October 3, Linear Regression, continued
 
 *Standing Meeting*
 
@@ -266,7 +266,7 @@ Kaggle competition
 
 Progress Report 2 Due before class
 
-## Thursday, October 5, (Le) Presenting Data: Scatterplots
+## Thursday, October 5, Presenting Data: Scatterplots
 
 *Resources*
 
@@ -284,7 +284,7 @@ Assignment 5 Due 11:59 PM, Wednesday, October 4
 
 Scatterplots: `06-scatterplots.Rmd`.
 
-## Tuesday, October 10, (La) Scatterplots, continued
+## Tuesday, October 10, Scatterplots, continued
 
 *Standing Meetings*
 
@@ -292,7 +292,7 @@ Scatterplots: `06-scatterplots.Rmd`.
 
 Presenting Data via Scatterplots
 
-## Thursday, October 12, (Le) Getting Data: Scraping Data from the Web, APIs
+## Thursday, October 12, Getting Data: Scraping Data from the Web, APIs
 
 *Resources*
 
