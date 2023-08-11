@@ -1,8 +1,0 @@
----
-title: "Assignment 1"
-author: "Doyle"
-date: "8/29/2019"
-output: html_document
----
-
-Changes to assignment 1. 
