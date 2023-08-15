@@ -146,7 +146,7 @@ R Intro and Resources
 
 [Github Intro and Resources](https://guides.github.com/activities/hello-world/)
 
-*Lesson Notes*
+*Lecture Notes*
 
 Introduction: `01-intro.Rmd`.
 
@@ -214,7 +214,7 @@ Presenting results in graphical format: barplots, density plots, dot plots, hist
 
 Progress Report 1 Due before class
 
-## Tuesday, September 19,Getting Data: Flat Files, Basic Concepts of "Tidy Data"
+## Tuesday, September 19, Getting Data: Flat Files, Basic Concepts of "Tidy Data"
 
 *Resources*
 
