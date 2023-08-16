@@ -2,6 +2,8 @@
 output: github_document
 ---
 
+Test clone
+
 # Welcome to Data Science!
 
 Today, we'll be working on getting you set up with the tools you will need for this class. Once you are set up, we'll do what we're here to do: analyze data!
