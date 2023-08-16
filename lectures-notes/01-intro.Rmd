@@ -32,7 +32,7 @@ If you haven't already, you need to download R here: <https://cran.r-project.org
 
 When we work with R, we communicate via the command line. To help automate this process, we can write scripts, which contain all of the commands to be executed. These scripts generate various kinds of output, like numbers on the screen, graphics or reports in common formats (pdf, word). Most programming languages have several **I** ntegrated **D** evelopment **E** nvironments (IDEs) that encompass all of these elements (scripts, command line interface, output). The primary IDE for R is RStudio.
 
-If you haven't already, you need to download RStudio here: <https://rstudio.com/products/rstudio/download/>. You need the free RStudio desktop version.
+If you haven't already, you need to download RStudio here: <https://posit.co/products/open-source/rstudio/>. You need the free RStudio desktop version.
 
 ## Installing git
 
@@ -42,15 +42,11 @@ If you haven't already, you need to download RStudio here: <https://rstudio.com/
 
 GitHub is online hosting service that is widely used by programmers. It allows you to easily share your work with the world. It is integrated with git, so version control is easy to do. If you haven't already, go to (<https://GitHub.com>) and sign up for free to get a username. Share the username with me as soon as you have one.
 
-## Initializing repos
-
-Everyone in the class will need a repository (repo from now on) on our GitHub organization. All I need from you is your username on GitHub, then I can add your repo to our organization.
-
 ## Installing GitHub Desktop
 
 GitHub desktop is a **G** raphical **U** ser **I** nterface for git. We won't use it much, but you will need it to "clone" your git repository.
 
-Download GitHub desktop (<https://desktop.GitHub.com/>). Choose the beta version, which appears to be working nicely. Accept all of the defaults on installation.
+Download GitHub desktop (<https://desktop.GitHub.com/>). Accept all of the defaults on installation.
 
 Unzip and open up the GitHub app. Then using the app, sign into GitHub using your username and ID.
 
@@ -66,7 +62,7 @@ First in RStudio, you'll need to generate an SSH key. This will let GitHub know 
 
 Now go to [GitHub](https://github.com) and in the upper right hand corner by your avatar, click on Settings. Go to SSH and GPG keys. Click "New SSH Key" and paste in the text you copied from RStudio. Name the key, and you should be all set.
 
-Now, go to your repo for this class. Everyone's repo is in the `hoddatasci` organization, and uses the naming convention `student_<yourlastname>`. Click the green button that says "clone or download," then copy the link provided by clicking on the clipboard next to the link.
+Now, go to the [public repo](https://github.com/MemeMedianMode/hoddatasci-master-f2023) for this class. Click the green button that says "clone or download," then copy the link provided by clicking on the clipboard next to the link.
 
 *N.B. in this class, and generally in programming, when you see* `<text>` *that means that you need to substitute something in.*
 
