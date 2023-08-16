@@ -25,9 +25,9 @@ folder. It should contain the following elements:
 
 Submit it under assignment 1, using the format
 `01-assignment_<lastname>.Rmd`. All assignments should be turned in
-using this format. Since my last name is Doyle, I would use
-`01-assignment_doyle.Rmd` as my file name. Unless your name is also
-Doyle, you should use a different name.
+using this format. Since my last name is Chin, I would use
+`01-assignment_Chin.Rmd` as my file name. Unless your name is also
+Chin, you should use a different name.
 
 *Stretch Items*
 
