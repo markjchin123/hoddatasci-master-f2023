@@ -21,7 +21,7 @@ folder. It should contain the following elements:
 
 1.  A sentence that says “Hello, World”
 2.  R output that summarizes one of the variables in the
-    `colllege.Rdata` dataset
+    `college.Rdata` dataset
 
 Submit it under assignment 1, using the format
 `01-assignment_<lastname>.Rmd`. All assignments should be turned in
