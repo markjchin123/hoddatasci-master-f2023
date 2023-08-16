@@ -1,8 +1,6 @@
 01-Assignment
 ================
 
-## Your first commit: hello\_world.Rmd
-
 .Rmd files will be the only file format we work in this class. .Rmd
 files contain three basic elements:
 
@@ -16,26 +14,26 @@ All assignments will be turned in as .Rmd files, and your final project?
 You guessed it, .Rmd.
 
 For your first assignment, I want you to create a file called
-`01-assignment_<lastname>.Rmd` in your github repo in the assignments
-folder. It should contain the following elements:
+`01-assignment_<lastname>.Rmd` to submit to Brightspace. It should
+contain the following elements:
 
 1.  A sentence that says “Hello, World”
-2.  R output that summarizes one of the variables in the
-    `college.Rdata` dataset
+2.  R output that summarizes one of the variables in the `sc_debt.Rds`
+    dataset
 
 Submit it under assignment 1, using the format
 `01-assignment_<lastname>.Rmd`. All assignments should be turned in
 using this format. Since my last name is Chin, I would use
-`01-assignment_Chin.Rmd` as my file name. Unless your name is also
-Chin, you should use a different name.
+`01-assignment_chin.Rmd` as my file name. Unless your name is also Chin,
+you should use a different name.
 
 *Stretch Items*
 
 If you have extra time, you can do the following:
 
-1.  Calculate the average earnings for individuals at the most selective
-    colleges, then compare that with individuals at the least selective
-    colleges in the dataset.
+1.  Calculate the average debt level for individuals at the most
+    selective colleges, then compare that with individuals at the least
+    selective colleges in the dataset.
 2.  Find a way to determine whether colleges with very high SAT scores
     tend to be larger or smaller than colleges with low SAT scores.
 3.  Plot the relationship between cost and debt. What do you see? Does
